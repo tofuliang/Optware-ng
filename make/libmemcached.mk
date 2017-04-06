@@ -138,6 +138,7 @@ $(LIBMEMCACHED_BUILD_DIR)/.configured: $(DL_DIR)/$(LIBMEMCACHED_SOURCE) $(LIBMEM
 		--host=$(GNU_TARGET_NAME) \
 		--target=$(GNU_TARGET_NAME) \
 		--prefix=$(TARGET_PREFIX) \
+		--enable-sasl \
 		--disable-nls \
 		--disable-static \
 	)

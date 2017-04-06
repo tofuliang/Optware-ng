@@ -26,7 +26,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-POSTGRESQL_VERSION=9.4.1
+POSTGRESQL_VERSION=9.6.2
 POSTGRESQL_SITE=ftp://ftp.postgresql.org/pub/source/v$(POSTGRESQL_VERSION)
 POSTGRESQL_SOURCE=postgresql-$(POSTGRESQL_VERSION).tar.bz2
 POSTGRESQL_DIR=postgresql-$(POSTGRESQL_VERSION)
@@ -139,7 +139,7 @@ $(POSTGRESQL_BUILD_DIR)/.configured: $(DL_DIR)/$(POSTGRESQL_SOURCE) $(POSTGRESQL
 		--with-openssl \
 	)
 
-	(cd $(@D)/src/timezone; gcc -o ./zic-host  -I../include zic.c ialloc.c scheck.c localtime.c ../port/snprintf.c ../port/qsort.c)
+	# (cd $(@D)/src/timezone; gcc -o ./zic-host  -I../include zic.c localtime.c ../port/snprintf.c ../port/qsort.c)
 	sed -i -e "s|ZIC=.*|ZIC=\./zic-host|" $(@D)/src/timezone/Makefile
 
 ifeq (uclibc, $(LIBC_STYLE))

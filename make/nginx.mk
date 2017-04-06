@@ -21,7 +21,7 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 NGINX_SITE=http://nginx.org/download
-NGINX_VERSION?=1.9.9
+NGINX_VERSION?=1.11.13
 NGINX_SOURCE=nginx-$(NGINX_VERSION).tar.gz
 NGINX_DIR=nginx-$(NGINX_VERSION)
 NGINX_UNZIP=zcat
@@ -29,7 +29,7 @@ NGINX_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
 NGINX_DESCRIPTION=A high perfomance http and reverse proxy server, and IMAP/POP3 proxy server.
 NGINX_SECTION=net
 NGINX_PRIORITY=optional
-NGINX_DEPENDS=openssl, pcre, zlib
+NGINX_DEPENDS=libxml2, libxslt, libgd, geoip, libiconv, freetype, expat, openssl, pcre, zlib
 NGINX_SUGGESTS=
 NGINX_CONFLICTS=
 
@@ -136,7 +136,7 @@ nginx-source: $(DL_DIR)/$(NGINX_SOURCE) $(NGINX_PATCHES)
 # shown below to make various patches to it.
 #
 $(NGINX_BUILD_DIR)/.configured: $(DL_DIR)/$(NGINX_SOURCE) $(NGINX_PATCHES) make/nginx.mk
-	$(MAKE) openssl-stage pcre-stage zlib-stage
+	$(MAKE) openssl-stage pcre-stage zlib-stage geoip-stage
 	rm -rf $(BUILD_DIR)/$(NGINX_DIR) $(@D)
 	$(NGINX_UNZIP) $(DL_DIR)/$(NGINX_SOURCE) | tar -C $(BUILD_DIR) -xvf -
 	if test -n "$(NGINX_PATCHES)" ; \
@@ -164,14 +164,45 @@ $(NGINX_BUILD_DIR)/.configured: $(DL_DIR)/$(NGINX_SOURCE) $(NGINX_PATCHES) make/
 		--http-client-body-temp-path=$(TARGET_PREFIX)/var/nginx/tmp/client_body_temp \
 		--http-proxy-temp-path=$(TARGET_PREFIX)/var/nginx/tmp/proxy_temp \
 		--http-fastcgi-temp-path=$(TARGET_PREFIX)/var/nginx/tmp/fastcgi_temp \
-                --with-cc=$(TARGET_CC) \
-                --with-cpp=$(TARGET_CPP) \
-                --with-cc-opt="$(STAGING_CPPFLAGS) $(NGINX_CPPFLAGS)" \
-                --with-ld-opt="$(STAGING_LDFLAGS) $(NGINX_LDFLAGS)" \
+		--with-cc=$(TARGET_CC) \
+		--with-cpp=$(TARGET_CPP) \
+		--with-cc-opt="$(STAGING_CPPFLAGS) $(NGINX_CPPFLAGS)" \
+		--with-ld-opt="$(STAGING_LDFLAGS) $(NGINX_LDFLAGS)" \
 		--with-md5=$(STAGING_LIB_DIR) \
 		--with-sha1=$(STAGING_LIB_DIR) \
-                --with-http_ssl_module \
+		--with-http_ssl_module \
 		--without-http_upstream_zone_module \
+		--with-select_module \
+		--with-poll_module \
+		--with-threads \
+		--with-file-aio \
+		--with-http_v2_module \
+		--with-http_realip_module \
+		--with-http_addition_module \
+		--with-http_xslt_module \
+		--with-http_image_filter_module \
+		--with-http_geoip_module \
+		--with-http_sub_module \
+		--with-http_dav_module \
+		--with-http_flv_module \
+		--with-http_mp4_module \
+		--with-http_gunzip_module \
+		--with-http_gzip_static_module \
+		--with-http_auth_request_module \
+		--with-http_random_index_module \
+		--with-http_secure_link_module \
+		--with-http_degradation_module \
+		--with-http_slice_module \
+		--with-http_stub_status_module \
+		--with-mail \
+		--with-mail_ssl_module \
+		--with-stream \
+		--with-stream_ssl_module \
+		--with-stream_realip_module \
+		--with-stream_geoip_module \
+		--with-cpp_test_module \
+		--with-pcre \
+		--with-pcre-jit \
 		; \
 	)
 	sed -i.orig \

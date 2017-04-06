@@ -4,8 +4,8 @@
 
 OPENSSL_SITE=http://www.openssl.org/source
 
-OPENSSL_VERSION := 1.1.0e
-OPENSSL_LIB_VERSION := 1.1
+OPENSSL_VERSION := 1.0.2h
+OPENSSL_LIB_VERSION := 1.0.0
 OPENSSL_IPK_VERSION := 1
 
 OPENSSL_SOURCE=openssl-$(OPENSSL_VERSION).tar.gz
@@ -30,7 +30,24 @@ OPENSSL_IPK=$(BUILD_DIR)/openssl_$(OPENSSL_VERSION)-$(OPENSSL_IPK_VERSION)_$(TAR
 OPENSSL_DEV_IPK_DIR=$(BUILD_DIR)/openssl-dev-$(OPENSSL_VERSION)-ipk
 OPENSSL_DEV_IPK=$(BUILD_DIR)/openssl-dev_$(OPENSSL_VERSION)-$(OPENSSL_IPK_VERSION)_$(TARGET_ARCH).ipk
 
+ifneq (,$(findstring 1.0.1, $(OPENSSL_VERSION)))
+ifeq (1.0.1a,$(OPENSSL_VERSION))
+OPENSSL_PATCHES=$(OPENSSL_SOURCE_DIR)/openssl-1.0.1a.patch
+endif
+
+else ifeq (,$(findstring 1.0.0, $(OPENSSL_VERSION)) )
 OPENSSL_PATCHES=
+
+else
+OPENSSL_PATCHES=$(strip \
+$(if $(filter 0.9.7, $(OPENSSL_LIB_VERSION)), $(OPENSSL_SOURCE_DIR)/Configure.patch, \
+$(OPENSSL_SOURCE_DIR)/0.9.8-configure-targets.patch))
+endif
+
+ifeq ($(OPTWARE_TARGET), dns323)
+OPENSSL_PATCHES+=$(OPENSSL_SOURCE_DIR)/Configure-O3-to-O2.patch
+endif
+
 OPENSSL_PATCHES+=$(OPENSSL_SOURCE_DIR)/openssl.cnf.patch
 
 .PHONY: openssl-source openssl-unpack openssl openssl-stage openssl-ipk openssl-clean openssl-dirclean openssl-check
@@ -110,6 +127,7 @@ $(OPENSSL_BUILD_DIR)/.configured: $(DL_DIR)/$(OPENSSL_SOURCE) $(OPENSSL_PATCHES)
 			$(OPENSSL_ARCH) \
 	)
 	sed -i -e 's|LIBDEPS=.|&$(STAGING_LDFLAGS) |' $(@D)/Makefile
+	sed -i -e 's|$$(PERL) tools/c_rehash certs||' $(@D)/apps/Makefile
 	touch $@
 
 openssl-unpack: $(OPENSSL_BUILD_DIR)/.configured

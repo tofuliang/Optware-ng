@@ -80,7 +80,7 @@
 +	'Y', '3', 'p', 'M', '\n'
 +};
 +
- int main() {
+ int main(void) {
 -    printf("%d", (int) sizeof($ngx_type));
      return 0;
  }

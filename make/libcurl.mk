@@ -27,7 +27,7 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 LIBCURL_SITE= http://curl.haxx.se/download
-LIBCURL_VERSION=7.24.0
+LIBCURL_VERSION=7.53.1
 LIBCURL_SOURCE=curl-$(LIBCURL_VERSION).tar.gz
 LIBCURL_DIR=curl-$(LIBCURL_VERSION)
 LIBCURL_UNZIP=zcat
@@ -110,7 +110,7 @@ libcurl-source: $(DL_DIR)/$(LIBCURL_SOURCE) $(LIBCURL_PATCHES)
 # first, then do that first (e.g. "$(MAKE) <bar>-stage <baz>-stage").
 #
 $(LIBCURL_BUILD_DIR)/.configured: $(DL_DIR)/$(LIBCURL_SOURCE) $(LIBCURL_PATCHES) make/libcurl.mk
-	$(MAKE) openssl-stage zlib-stage
+	$(MAKE) openssl-stage zlib-stage c-ares-stage
 	rm -rf $(BUILD_DIR)/$(LIBCURL_DIR) $(@D)
 	$(LIBCURL_UNZIP) $(DL_DIR)/$(LIBCURL_SOURCE) | tar -C $(BUILD_DIR) -xvf -
 	if test -n "$(LIBCURL_PATCHES)"; then \
@@ -142,7 +142,6 @@ endif
 		--enable-ipv6 \
 		--enable-tftp \
 		--disable-nls \
-		--disable-ares \
 		--disable-dict \
 		--disable-debug \
 		--disable-gopher \

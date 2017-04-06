@@ -20,10 +20,9 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-PHP_MEMCACHED_REPOSITORY=https://github.com/php-memcached-dev/php-memcached.git
-PHP_MEMCACHED_VERSION=2.2.0+git20160613
-PHP_MEMCACHED_TREEISH=`git rev-list --max-count=1 --until=2016-06-13 HEAD`
-PHP_MEMCACHED_SOURCE=php-memcached-$(PHP_MEMCACHED_VERSION).tar.gz
+PHP_MEMCACHED_VERSION=3.0.2
+PHP_MEMCACHED_REPOSITORY=https://github.com/php-memcached-dev/php-memcached/archive/v3.0.2.tar.gz/
+PHP_MEMCACHED_SOURCE=v$(PHP_MEMCACHED_VERSION).tar.gz
 PHP_MEMCACHED_DIR=php-memcached-$(PHP_MEMCACHED_VERSION)
 PHP_MEMCACHED_UNZIP=zcat
 PHP_MEMCACHED_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
@@ -77,13 +76,7 @@ PHP_MEMCACHED_IPK=$(BUILD_DIR)/php-memcached_$(PHP_MEMCACHED_VERSION)-$(PHP_MEMC
 # scripts/checksums/$(PHP_MEMCACHED_SOURCE).sha512
 #
 $(DL_DIR)/$(PHP_MEMCACHED_SOURCE):
-	(cd $(BUILD_DIR) ; \
-		rm -rf php-memcached && \
-		git clone --bare $(PHP_MEMCACHED_REPOSITORY) php-memcached && \
-		(cd php-memcached && \
-		git archive --format=tar --prefix=$(PHP_MEMCACHED_DIR)/ $(PHP_MEMCACHED_TREEISH) | gzip > $@) && \
-		rm -rf php-memcached ; \
-	)
+	$(WGET) -P $(@D) $(PHP_MEMCACHED_REPOSITORY)/php-memcached_$(@F)
 
 #
 # The source code depends on it existing within the download directory.
@@ -137,6 +130,8 @@ $(PHP_MEMCACHED_BUILD_DIR)/.configured: $(DL_DIR)/$(PHP_MEMCACHED_SOURCE) $(PHP_
 		--prefix=$(TARGET_PREFIX) \
 		--disable-nls \
 		--disable-static \
+		--enable-memcached-json \
+		--enable-memcached-sasl \
 		--with-libmemcached-dir=$(STAGING_PREFIX) \
 		--with-php-config=$(STAGING_DIR)/bin/php-config \
 	)
