@@ -13,10 +13,10 @@
 # It is usually "zcat" (for .gz) or "bzcat" (for .bz2)
 #
 PHP_SITE=http://static.php.net/www.php.net/distributions/
-PHP_VERSION=7.1.3
-PHP_SOURCE=php-$(PHP_VERSION).tar.bz2
+PHP_VERSION=7.1.7
+PHP_SOURCE=php-$(PHP_VERSION).tar.xz
 PHP_DIR=php-$(PHP_VERSION)
-PHP_UNZIP=bzcat
+PHP_UNZIP=xzcat
 PHP_MAINTAINER=Josh Parsons <jbparsons@ucdavis.edu>
 PHP_DESCRIPTION=The php scripting language
 PHP_SECTION=net
@@ -108,8 +108,8 @@ PHP_GD_IPK=$(BUILD_DIR)/php-gd_$(PHP_VERSION)-$(PHP_IPK_VERSION)_$(TARGET_ARCH).
 PHP_GMP_IPK_DIR=$(BUILD_DIR)/php-gmp-$(PHP_VERSION)-ipk
 PHP_GMP_IPK=$(BUILD_DIR)/php-gmp_$(PHP_VERSION)-$(PHP_IPK_VERSION)_$(TARGET_ARCH).ipk
 
-PHP_IMAP_IPK_DIR=$(BUILD_DIR)/php-imap-$(PHP_VERSION)-ipk
-PHP_IMAP_IPK=$(BUILD_DIR)/php-imap_$(PHP_VERSION)-$(PHP_IPK_VERSION)_$(TARGET_ARCH).ipk
+#PHP_IMAP_IPK_DIR=$(BUILD_DIR)/php-imap-$(PHP_VERSION)-ipk
+#PHP_IMAP_IPK=$(BUILD_DIR)/php-imap_$(PHP_VERSION)-$(PHP_IPK_VERSION)_$(TARGET_ARCH).ipk
 
 PHP_INTL_IPK_DIR=$(BUILD_DIR)/php-intl-$(PHP_VERSION)-ipk
 PHP_INTL_IPK=$(BUILD_DIR)/php-intl_$(PHP_VERSION)-$(PHP_IPK_VERSION)_$(TARGET_ARCH).ipk
@@ -322,18 +322,18 @@ $(PHP_GMP_IPK_DIR)/CONTROL/control:
 	@echo "Description: libgmp extension for php" >>$@
 	@echo "Depends: php, libgmp" >>$@
 
-$(PHP_IMAP_IPK_DIR)/CONTROL/control:
-	@$(INSTALL) -d $(@D)
-	@rm -f $@
-	@echo "Package: php-imap" >>$@
-	@echo "Architecture: $(TARGET_ARCH)" >>$@
-	@echo "Priority: $(PHP_PRIORITY)" >>$@
-	@echo "Section: $(PHP_SECTION)" >>$@
-	@echo "Version: $(PHP_VERSION)-$(PHP_IPK_VERSION)" >>$@
-	@echo "Maintainer: $(PHP_MAINTAINER)" >>$@
-	@echo "Source: $(PHP_SITE)/$(PHP_SOURCE)" >>$@
-	@echo "Description: imap extension for php" >>$@
-	@echo "Depends: php, imap-libs, libpam" >>$@
+#$(PHP_IMAP_IPK_DIR)/CONTROL/control:
+#	@$(INSTALL) -d $(@D)
+#	@rm -f $@
+#	@echo "Package: php-imap" >>$@
+#	@echo "Architecture: $(TARGET_ARCH)" >>$@
+#	@echo "Priority: $(PHP_PRIORITY)" >>$@
+#	@echo "Section: $(PHP_SECTION)" >>$@
+#	@echo "Version: $(PHP_VERSION)-$(PHP_IPK_VERSION)" >>$@
+#	@echo "Maintainer: $(PHP_MAINTAINER)" >>$@
+#	@echo "Source: $(PHP_SITE)/$(PHP_SOURCE)" >>$@
+#	@echo "Description: imap extension for php" >>$@
+#	@echo "Depends: php, imap-libs, libpam" >>$@
 
 $(PHP_INTL_IPK_DIR)/CONTROL/control:
 	@$(INSTALL) -d $(@D)
@@ -693,7 +693,7 @@ php-source: $(DL_DIR)/$(PHP_SOURCE) $(PHP_PATCHES)
 $(PHP_BUILD_DIR)/.configured: $(DL_DIR)/$(PHP_SOURCE) $(PHP_HOST_CLI) $(PHP_PATCHES) make/php.mk
 	$(MAKE) bzip2-stage gdbm-stage libcurl-stage libdb-stage libgd-stage libxml2-stage \
 		libxslt-stage openssl-stage mysql-stage postgresql-stage freetds-stage \
-		unixodbc-stage imap-stage libpng-stage libjpeg-stage libzip-stage icu-stage \
+		unixodbc-stage libpng-stage libjpeg-stage libzip-stage icu-stage \
 		libpam-stage \
 		libgmp-stage sqlite-stage libiconv-stage libmcrypt-stage libtool-stage libtool-host-stage 
 ifeq (openldap, $(filter openldap, $(PACKAGES)))
@@ -780,8 +780,6 @@ endif
 		--with-gettext=shared,$(STAGING_PREFIX) \
 		--with-gmp=shared,$(STAGING_PREFIX) \
 		--with-mhash=shared,$(STAGING_PREFIX) \
-		--with-imap=shared,$(STAGING_PREFIX) \
-		--with-imap-ssl=$(STAGING_PREFIX)/ \
 		--enable-intl=shared \
 		--with-icu-dir=$(STAGING_PREFIX) \
 		--with-ldap=shared,$(STAGING_PREFIX) \
@@ -941,14 +939,14 @@ $(PHP_TARGET_IPKS): $(PHP_BUILD_DIR)/.built
 	mv $(PHP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/gmp.so $(PHP_GMP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/gmp.so
 	echo extension=gmp.so >$(PHP_GMP_IPK_DIR)$(TARGET_PREFIX)/etc/php.d/gmp.ini
 	cd $(BUILD_DIR); $(IPKG_BUILD) $(PHP_GMP_IPK_DIR)
-	### now make php-imap
-	rm -rf $(PHP_IMAP_IPK_DIR) $(BUILD_DIR)/php-imap_*_$(TARGET_ARCH).ipk
-	$(MAKE) $(PHP_IMAP_IPK_DIR)/CONTROL/control
-	$(INSTALL) -d $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions
-	$(INSTALL) -d $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/etc/php.d
-	mv $(PHP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/imap.so $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/imap.so
-	echo extension=imap.so >$(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/etc/php.d/imap.ini
-	cd $(BUILD_DIR); $(IPKG_BUILD) $(PHP_IMAP_IPK_DIR)
+#	### now make php-imap
+#	rm -rf $(PHP_IMAP_IPK_DIR) $(BUILD_DIR)/php-imap_*_$(TARGET_ARCH).ipk
+#	$(MAKE) $(PHP_IMAP_IPK_DIR)/CONTROL/control
+#	$(INSTALL) -d $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions
+#	$(INSTALL) -d $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/etc/php.d
+#	mv $(PHP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/imap.so $(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/lib/php/extensions/imap.so
+#	echo extension=imap.so >$(PHP_IMAP_IPK_DIR)$(TARGET_PREFIX)/etc/php.d/imap.ini
+#	cd $(BUILD_DIR); $(IPKG_BUILD) $(PHP_IMAP_IPK_DIR)
 	### now make php-intl
 	rm -rf $(PHP_INTL_IPK_DIR) $(BUILD_DIR)/php-intl_*_$(TARGET_ARCH).ipk
 	$(MAKE) $(PHP_INTL_IPK_DIR)/CONTROL/control

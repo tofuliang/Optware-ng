@@ -20,10 +20,10 @@
 # You should change all these variables to suit your package.
 #
 LIBPNG_SITE=http://$(SOURCEFORGE_MIRROR)/sourceforge/libpng
-LIBPNG_VERSION=1.2.50
-LIBPNG_SOURCE=libpng-$(LIBPNG_VERSION).tar.gz
+LIBPNG_VERSION=1.2.57
+LIBPNG_SOURCE=libpng-$(LIBPNG_VERSION).tar.xz
 LIBPNG_DIR=libpng-$(LIBPNG_VERSION)
-LIBPNG_UNZIP=zcat
+LIBPNG_UNZIP=xzcat
 LIBPNG_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
 LIBPNG_DESCRIPTION=Portable Network Graphics Libraries
 LIBPNG_SECTION=lib

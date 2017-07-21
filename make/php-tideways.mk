@@ -20,7 +20,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-PHP_TIDEWAYS_VERSION=4.1.1
+PHP_TIDEWAYS_VERSION=4.1.2
 PHP_TIDEWAYS_REPOSITORY=https://github.com/tideways/php-profiler-extension/archive
 PHP_TIDEWAYS_SOURCE=v$(PHP_TIDEWAYS_VERSION).tar.gz
 PHP_TIDEWAYS_DIR=php-profiler-extension-$(PHP_TIDEWAYS_VERSION)

@@ -20,7 +20,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-PHP_PHALCON_VERSION=3.1.2
+PHP_PHALCON_VERSION=3.2.1
 PHP_PHALCON_REPOSITORY=https://github.com/phalcon/cphalcon/archive/
 PHP_PHALCON_SOURCE=v$(PHP_PHALCON_VERSION).tar.gz
 PHP_PHALCON_DIR=cphalcon-$(PHP_PHALCON_VERSION)

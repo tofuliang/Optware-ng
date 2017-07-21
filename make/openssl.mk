@@ -4,7 +4,7 @@
 
 OPENSSL_SITE=http://www.openssl.org/source
 
-OPENSSL_VERSION := 1.1.0e
+OPENSSL_VERSION := 1.1.0f
 OPENSSL_LIB_VERSION := 1.1
 OPENSSL_IPK_VERSION := 1
 

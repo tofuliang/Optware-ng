@@ -12,11 +12,11 @@
 # LIBGD_UNZIP is the command used to unzip the source.
 # It is usually "zcat" (for .gz) or "bzcat" (for .bz2)
 #
-LIBGD_SITE=https://bitbucket.org/libgd/gd-libgd/downloads
-LIBGD_VERSION=2.1.0
-LIBGD_SOURCE=libgd-$(LIBGD_VERSION).tar.bz2
+LIBGD_VERSION=2.2.4
+LIBGD_SITE=https://github.com/libgd/libgd/releases/download/gd-$(LIBGD_VERSION)
+LIBGD_SOURCE=libgd-$(LIBGD_VERSION).tar.xz
 LIBGD_DIR=libgd-$(LIBGD_VERSION)
-LIBGD_UNZIP=bzcat
+LIBGD_UNZIP=xzcat
 LIBGD_MAINTAINER=Josh Parsons <jbparsons@ucdavis.edu>
 LIBGD_DESCRIPTION=An ANSI C library for the dynamic creation of images
 LIBGD_SECTION=lib

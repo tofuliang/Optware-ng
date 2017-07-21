@@ -5,7 +5,7 @@
 ###########################################################
 
 GDBM_SITE=ftp://ftp.gnu.org/gnu/gdbm
-GDBM_VERSION=1.8.3
+GDBM_VERSION=1.13
 GDBM_LIB_VERSION=3.0.0
 GDBM_SOURCE=gdbm-$(GDBM_VERSION).tar.gz
 GDBM_DIR=gdbm-$(GDBM_VERSION)
@@ -20,7 +20,7 @@ GDBM_CONFLICTS=
 
 GDBM_IPK_VERSION=4
 
-GDBM_PATCHES=$(GDBM_SOURCE_DIR)/Makefile.patch
+# GDBM_PATCHES=$(GDBM_SOURCE_DIR)/Makefile.patch
 
 GDBM_BUILD_DIR=$(BUILD_DIR)/gdbm
 GDBM_SOURCE_DIR=$(SOURCE_DIR)/gdbm
@@ -37,10 +37,11 @@ gdbm-source: $(DL_DIR)/$(GDBM_SOURCE) $(GDBM_PATCHES)
 $(GDBM_BUILD_DIR)/.configured: $(DL_DIR)/$(GDBM_SOURCE) $(GDBM_PATCHES) make/gdbm.mk
 	rm -rf $(BUILD_DIR)/$(GDBM_DIR) $(@D)
 	$(GDBM_UNZIP) $(DL_DIR)/$(GDBM_SOURCE) | tar -C $(BUILD_DIR) -xvf -
-	cat $(GDBM_PATCHES) | $(PATCH) -d $(BUILD_DIR)/$(GDBM_DIR) -p1
+#	cat $(GDBM_PATCHES) | $(PATCH) -d $(BUILD_DIR)/$(GDBM_DIR) -p1
 	mv $(BUILD_DIR)/$(GDBM_DIR) $(@D)
 	(cd $(@D); \
 		$(TARGET_CONFIGURE_OPTS) \
+		CFLAGS="$(TARGET_CFLAGS) -D_GNU_SOURCE" \
 		./configure \
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_TARGET_NAME) \
@@ -62,7 +63,7 @@ gdbm: $(GDBM_BUILD_DIR)/.built
 
 $(GDBM_BUILD_DIR)/.staged: $(GDBM_BUILD_DIR)/.built
 	rm -f $@
-	$(MAKE) -C $(@D) INSTALL_ROOT=$(STAGING_DIR) install install-compat -j1
+	$(MAKE) -C $(@D) INSTALL_ROOT=$(STAGING_DIR) install  -j1
 	rm -rf $(STAGING_LIB_DIR)/libgdbm.la
 	rm -rf $(STAGING_LIB_DIR)/libgdbm_compat.la
 	touch $@

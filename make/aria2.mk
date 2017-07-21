@@ -20,13 +20,13 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-ARIA2_VERSION=1.31.0
+ARIA2_VERSION=1.32.0
 
 ARIA2_SITE=https://github.com/aria2/aria2/releases/download/release-$(ARIA2_VERSION)/
 
-ARIA2_SOURCE=aria2-$(ARIA2_VERSION).tar.bz2
+ARIA2_SOURCE=aria2-$(ARIA2_VERSION).tar.xz
 ARIA2_DIR=aria2-$(ARIA2_VERSION)
-ARIA2_UNZIP=bzcat
+ARIA2_UNZIP=xzcat
 ARIA2_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
 ARIA2_DESCRIPTION=A utility for downloading files. The supported protocols are HTTP(S), FTP, BitTorrent  (DHT, PEX, MSE/PE), and Metalink.
 ARIA2_SECTION=net
@@ -51,7 +51,8 @@ ARIA2_CONFFILES=$(TARGET_PREFIX)/etc/aria2.conf $(TARGET_PREFIX)/etc/init.d/S81a
 # ARIA2_PATCHES should list any patches, in the the order in
 # which they should be applied to the source code.
 #
-ARIA2_PATCHES=$(ARIA2_SOURCE_DIR)/configure.patch
+ARIA2_PATCHES=$(ARIA2_SOURCE_DIR)/configure.patch \
+$(ARIA2_SOURCE_DIR)/unlimit.patch
 
 #
 # If the compilation of the package requires additional

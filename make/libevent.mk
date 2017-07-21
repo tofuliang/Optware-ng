@@ -4,8 +4,8 @@
 #
 #############################################################
 
-LIBEVENT_SITE=https://github.com/downloads/libevent/libevent
-LIBEVENT_VERSION=2.0.20
+LIBEVENT_VERSION=2.1.8
+LIBEVENT_SITE=https://github.com/libevent/libevent/releases/download/release-$(LIBEVENT_VERSION)-stable
 LIBEVENT_DIR=libevent-$(LIBEVENT_VERSION)-stable
 LIBEVENT_SOURCE=$(LIBEVENT_DIR).tar.gz
 LIBEVENT_UNZIP=zcat

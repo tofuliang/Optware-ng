@@ -20,7 +20,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-PHP_YAF_VERSION=3.0.4
+PHP_YAF_VERSION=3.0.5
 PHP_YAF_REPOSITORY=https://github.com/laruence/yaf/archive/
 PHP_YAF_SOURCE=yaf-$(PHP_YAF_VERSION).tar.gz
 PHP_YAF_DIR=yaf-yaf-$(PHP_YAF_VERSION)
