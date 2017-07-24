@@ -21,11 +21,11 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-FREETDS_SITE=ftp://ftp.ibiblio.org/pub/Linux/ALPHA/freetds/stable
+FREETDS_SITE=https://mirrors.nju.edu.cn/macports/distfiles/freetds
 FREETDS_VERSION=1.00.48
-FREETDS_SOURCE=freetds-$(FREETDS_VERSION).tar.gz
+FREETDS_SOURCE=freetds-$(FREETDS_VERSION).tar.bz2
 FREETDS_DIR=freetds-$(FREETDS_VERSION)
-FREETDS_UNZIP=zcat
+FREETDS_UNZIP=bzcat
 FREETDS_MAINTAINER=Brian Zhou <bzhou@users.sf.net>
 FREETDS_DESCRIPTION=A free re-implementation of the Tabular Data Stream protocol for Sybase or MS SQL Server.
 FREETDS_SECTION=misc

@@ -20,7 +20,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-GEOIP_SITE=http://www.maxmind.com/download/geoip/api/c
+GEOIP_SITE=http://download.openpkg.org/components/cache/geoip
 GEOIP_VERSION=1.6.11
 GEOIP_SOURCE=GeoIP-$(GEOIP_VERSION).tar.gz
 GEOIP_DIR=GeoIP-$(GEOIP_VERSION)
