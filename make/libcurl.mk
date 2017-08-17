@@ -26,8 +26,8 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-LIBCURL_SITE= http://curl.haxx.se/download
-LIBCURL_VERSION=7.54.1
+LIBCURL_SITE=http://curl.haxx.se/download
+LIBCURL_VERSION=7.55.0
 LIBCURL_SOURCE=curl-$(LIBCURL_VERSION).tar.gz
 LIBCURL_DIR=curl-$(LIBCURL_VERSION)
 LIBCURL_UNZIP=zcat
@@ -41,7 +41,7 @@ LIBCURL_CONFLICTS=
 #
 # LIBCURL_IPK_VERSION should be incremented when the ipk changes.
 #
-LIBCURL_IPK_VERSION=3
+LIBCURL_IPK_VERSION=2
 
 #
 # LIBCURL_CONFFILES should be a list of user-editable files
@@ -247,7 +247,7 @@ $(LIBCURL_IPK) $(LIBCURL-DEV_IPK): $(LIBCURL_BUILD_DIR)/.built
 	$(MAKE) $(LIBCURL_IPK_DIR)/CONTROL/control
 	echo $(LIBCURL_CONFFILES) | sed -e 's/ /\n/g' > $(LIBCURL_IPK_DIR)/CONTROL/conffiles
 	$(INSTALL) -d $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/share/man $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/lib
-	mv $(LIBCURL_IPK_DIR)$(TARGET_PREFIX)/share/man/man3 $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/share/man/
+	mv $(LIBCURL_IPK_DIR)$(TARGET_PREFIX)/share/man/man1 $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/share/man/
 	mv $(LIBCURL_IPK_DIR)$(TARGET_PREFIX)/include $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/
 	mv $(LIBCURL_IPK_DIR)$(TARGET_PREFIX)/lib/pkgconfig $(LIBCURL-DEV_IPK_DIR)$(TARGET_PREFIX)/lib/
 	cd $(BUILD_DIR); $(IPKG_BUILD) $(LIBCURL_IPK_DIR)

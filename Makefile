@@ -259,11 +259,11 @@ COMMON_PACKAGES = \
 	bsdgames bsdmainutils \
 	btpd busybox byrequest bzflag bzip2 \
 	bluez-libs bluez-utils bluez-hcidump \
-	bluez2-libs bluez2-utils \
+	bluez2-libs bluez2-utils bvi \
 	c-ares cabextract cacerts jre-cacerts cadaver cairo calc calcurse castget \
 	catdoc ccollect ccrypt ccxstream cdargs \
 	cdrtools centerim cuetools \
-	cherokee chicken chillispot chrpath cksfv \
+	cherokee chicken chillispot chromaprint chrpath cksfv \
 	classpath clamav clearsilver climm clinkcc clips cmdftp collectd \
 	confuse connect coreutils corkscrew cpio cppunit cpufrequtils cron cryptcat \
 	cscope ctags ctcs ctorrent ctrlproxy \
@@ -324,7 +324,7 @@ COMMON_PACKAGES = \
 	libglade libhid \
 	libical \
 	libid3tag libidn libieee1284 libijs libinklevel libjansson libjbigkit libjpeg \
-	libksba liblcms liblcms2 libmaa libmad libmatroska libmemcache libmemcached libmicrohttpd \
+	libksba liblcms liblcms2 libmaa libmad libmatroska libmediainfo libmemcache libmemcached libmicrohttpd \
 	libmcrypt libmm \
 	libmms libmnl libmpc libmpcdec libmpdclient libmpeg2 libmpfr libmrss libmtp \
 	libnetfilter-acct libnetfilter-conntrack libnetfilter-log libnetfilter-queue libnfnetlink libnettle libnl libnsl libnxml \
@@ -333,13 +333,13 @@ COMMON_PACKAGES = \
 	libsamplerate libserf libshout libsigc++ libsoup libsndfile libsodium libsoxr libstdc++ \
 	libtasn1 libtheora libtiff libtool libtorrent \
 	libunistring libupnp libusb libusb1 libuv libvncserver \
-	libvorbis libvorbisidec libwebsockets libxfce4ui libxfce4util libxkbcommon libxml2 libxslt libzip \
+	libvorbis libvorbisidec libwebsockets libxfce4ui libxfce4util libxkbcommon libxml2 libxslt libzen libzip \
 	lighttpd lirc links2 linksys-tftp linphone littlesmalltalk llink \
 	logrotate lookat loudmouth lrzsz lsof ltrace \
 	lua luarocks lxappearance lxde-icon-theme \
 	lynx lzo \
-	m4 madplay make man man-pages mc mcabber md5deep mdadm \
-	mediatomb mediawiki megatools memcached mesalib metalog memtester \
+	m4 mac madplay make man man-pages mc mcabber md5deep mdadm \
+	mediainfo mediatomb mediawiki meganz-sdk megatools memcached mesalib metalog memtester \
 	mg miau microcom microdc2 microperl mimms \
 	minicom minidlna minidlna-rescan minihttpd miniupnpd \
 	mini-sendmail mini-snmpd \
@@ -364,7 +364,7 @@ COMMON_PACKAGES = \
 	ocaml oleo open2300 $(OPENJDK_PACKAGES) \
 	openobex obexftp \
 	opendchub openjpeg openldap opensips \
-	openssl openssh sshfs openvpn oscam \
+	openssl openssh sshfs sshguard openvpn oscam \
 	optware-devel ossp-js oww owwlog \
 	p7zip p910nd pal palantir pango parted \
 	par2cmdline patch patchutils \
@@ -383,7 +383,7 @@ COMMON_PACKAGES = \
 	rlfe rlwrap rox-filer rrdcollect rrdtool \
 	rssh rsstail rsync rtmpdump rtorrent rtpproxy ruby rubygems rxtx \
 	sablevm samba samba2 samba34 samba35 samba36 sane-backends \
-	scli scponly screen scrobby scsi-idle sdl sdparm \
+	scli scponly screen scrobby scsi-idle sd-idle sdl sdparm \
 	sed sendmail ser ser2net setserial setpwc sg3-utils shared-mime-info \
 	sharutils shellinabox shntool silc-client simh sipcalc siproxd sispmctl \
 	slang slrn slsc \
@@ -408,7 +408,7 @@ COMMON_PACKAGES = \
 	unzip up-imapproxy updatedd upslug2 \
 	upx usbutils ushare utelnetd utf8proc util-linux \
 	vblade vdr-mediamvp vim vitetris vlc \
-	vnstat vorbis-tools vpnc vsftpd vte vtun \
+	vnstat vorbis-tools vorbisgain vpnc vsftpd vte vtun \
 	w3cam w3m wayland wakelan wavpack webalizer weechat werc wget \
 	which whois wizd wpa-supplicant wput wxbase \
 	xerces-c xmlrpc-c \

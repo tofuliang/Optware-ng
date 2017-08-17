@@ -21,41 +21,31 @@
 #
 IMAGEMAGICK_SITE=ftp://ftp.imagemagick.org/pub/ImageMagick/releases
 IMAGEMAGICK_SITE2=http://ftp.sunet.se/pub/multimedia/graphics/ImageMagic
-ifneq ($(OPTWARE_TARGET), $(filter wl500g mss, $(OPTWARE_TARGET)))
-IMAGEMAGICK_VER=6.9.3
-IMAGEMAGICK_REV=5
-IMAGEMAGICK_IPK_VERSION=1
+IMAGEMAGICK_VER=6.9.9
+IMAGEMAGICK_REV=7
 IMAGEMAGICK_SOURCE=ImageMagick-$(IMAGEMAGICK_VER)-$(IMAGEMAGICK_REV).tar.xz
 IMAGEMAGICK_UNZIP=xzcat
 IMAGEMAGICK_DIR=ImageMagick-$(IMAGEMAGICK_VER)-$(IMAGEMAGICK_REV)
-else
-IMAGEMAGICK_VER=6.3.1
-IMAGEMAGICK_REV=6
-IMAGEMAGICK_IPK_VERSION=4
-IMAGEMAGICK_SOURCE=ImageMagick-$(IMAGEMAGICK_VER)-$(IMAGEMAGICK_REV).tar.gz
-IMAGEMAGICK_UNZIP=zcat
-IMAGEMAGICK_DIR=ImageMagick-$(IMAGEMAGICK_VER)
-ifeq ($(LIBC_STYLE), uclibc)
-IMAGEMAGICK_PATCHES=$(IMAGEMAGICK_SOURCE_DIR)/uClibc-errno.patch
-endif
-endif
 IMAGEMAGICK_VERSION=$(IMAGEMAGICK_VER).$(IMAGEMAGICK_REV)
 IMAGEMAGICK_MAINTAINER=NSLU2 Linux <nslu2-linux@yahoogroups.com>
 IMAGEMAGICK_DESCRIPTION=A set of image processing utilities.
 IMAGEMAGICK_SECTION=graphics
 IMAGEMAGICK_PRIORITY=optional
-IMAGEMAGICK_DEPENDS=zlib, freetype, libjpeg, libpng, libtiff, libstdc++, libtool, bzip2, liblcms, pango
+IMAGEMAGICK_DEPENDS=zlib, freetype, libjpeg, libpng, libtiff, libstdc++, \
+		libtool, bzip2, liblcms2, libxml2, pango, libjbigkit
 IMAGEMAGICK_SUGGESTS=
 IMAGEMAGICK_CONFLICTS=
+
+#
+# IMAGEMAGICK_IPK_VERSION should be incremented when the ipk changes.
+#
+IMAGEMAGICK_IPK_VERSION=2
 
 #
 # If the compilation of the package requires additional
 # compilation or linking flags, then list them here.
 #
 IMAGEMAGICK_CPPFLAGS=-I$(STAGING_INCLUDE_DIR)/freetype2
-ifeq ($(OPTWARE_TARGET), openwrt-ixp4xx)
-IMAGEMAGICK_CPPFLAGS+=-D__error_t_defined
-endif
 IMAGEMAGICK_LDFLAGS=
 
 #
@@ -106,7 +96,8 @@ imagemagick-source: $(DL_DIR)/$(IMAGEMAGICK_SOURCE) $(IMAGEMAGICK_PATCHES)
 # first, then do that first (e.g. "$(MAKE) <bar>-stage <baz>-stage").
 #
 $(IMAGEMAGICK_BUILD_DIR)/.configured: $(DL_DIR)/$(IMAGEMAGICK_SOURCE) $(IMAGEMAGICK_PATCHES) make/imagemagick.mk
-	make zlib-stage freetype-stage libjpeg-stage libpng-stage bzip2-stage libtiff-stage pango-stage
+	$(MAKE) zlib-stage freetype-stage libjpeg-stage libpng-stage bzip2-stage libtiff-stage pango-stage \
+		liblcms2-stage libxml2-stage libjbigkit-stage
 	rm -rf $(BUILD_DIR)/$(IMAGEMAGICK_DIR) $(@D)
 	$(IMAGEMAGICK_UNZIP) $(DL_DIR)/$(IMAGEMAGICK_SOURCE) | tar -C $(BUILD_DIR) -xvf -
 	if test -n "$(IMAGEMAGICK_PATCHES)" ; \
@@ -206,7 +197,13 @@ $(IMAGEMAGICK_IPK_DIR)/CONTROL/control:
 $(IMAGEMAGICK_IPK): $(IMAGEMAGICK_BUILD_DIR)/.built
 	rm -rf $(IMAGEMAGICK_IPK_DIR) $(BUILD_DIR)/imagemagick_*_$(TARGET_ARCH).ipk
 	$(MAKE) -C $(IMAGEMAGICK_BUILD_DIR) DESTDIR=$(IMAGEMAGICK_IPK_DIR) transform='' install-am
-	rm -f $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin/*
+	cd $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin; \
+		for f in `ls | egrep -v -- '-config$$'`; do \
+			$(STRIP_COMMAND) $$f; \
+			mv -f "$$f" "imagemagick-$$f"; \
+		done
+	sed -i -e 's|$(OPTWARE_TOP)/scripts/pkg-config.sh|$(TARGET_PREFIX)/bin/pkg-config|g' \
+		$(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin/*-config
 	rm -f $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/lib/libltdl*
 #	rm -f $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/lib/*.la
 	find $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/lib/ \
@@ -225,14 +222,6 @@ $(IMAGEMAGICK_IPK): $(IMAGEMAGICK_BUILD_DIR)/.built
 		exec chmod +w $$f; \
 		$(STRIP_COMMAND) $$f; \
 		exec chmod +w $$f; \
-		done
-	cp $(IMAGEMAGICK_BUILD_DIR)/Magick++/bin/Magick++-config $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin
-	cp $(IMAGEMAGICK_BUILD_DIR)/magick/Magick-config $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin
-	cp $(IMAGEMAGICK_BUILD_DIR)/wand/Wand-config $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin
-	for f in `ls $(IMAGEMAGICK_BUILD_DIR)/utilities/.libs`; \
-		do \
-		$(STRIP_COMMAND) $(IMAGEMAGICK_BUILD_DIR)/utilities/.libs/$$f -o $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin/$$f; \
-		$(STRIP_COMMAND) $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/bin/$$f; \
 		done
 	rm -rf $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/share/ImageMagick-$(IMAGEMAGICK_VER)/www
 	rm -rf $(IMAGEMAGICK_IPK_DIR)$(TARGET_PREFIX)/share/ImageMagick-$(IMAGEMAGICK_VER)/images
