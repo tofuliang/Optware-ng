@@ -36,7 +36,7 @@ PHP_MEMCACHED_CONFLICTS=
 #
 # PHP_MEMCACHED_IPK_VERSION should be incremented when the ipk changes.
 #
-PHP_MEMCACHED_IPK_VERSION=1
+PHP_MEMCACHED_IPK_VERSION=3
 
 #
 # PHP_MEMCACHED_PATCHES should list any patches, in the the order in

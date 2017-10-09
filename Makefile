@@ -171,7 +171,7 @@ PYTHON_PACKAGES = \
 	py-clips py-configobj py-constraint py-crypto py-curl \
 	py-decorator py-decoratortools py-dispatcher py-django py-docutils py-duplicity \
 	py-elementtree py-feedparser py-flup py-formencode \
-	py-gdchart2 py-gd py-genshi py-gnosis-utils py-gobject2 py-gtk \
+	py-gdchart2 py-gd py-genshi py-geoip py-gnosis-utils py-gobject2 py-gtk \
 	py-idna py-imaplib2 py-ipaddress py-jinja2 \
 	py-hgsubversion py-hgsvn py-jsmin py-kid py-lepl py-lxml \
 	py-mako py-markdown py-mercurial \
@@ -312,7 +312,7 @@ COMMON_PACKAGES = \
 	ircd-hybrid irssi ivorbis-tools \
 	jabberd jamvm jed jfsutils jikes jove joe \
 	kamailio kbproto keychain kismet kissdx knock \
-	lame launchtool lcd4linux ldconfig leafnode less lftp lha \
+	lame launchtool lcd4linux ldconfig ldd leafnode less lftp lha \
 	liba52 libacl libao libart libass libassuan libatomic-ops libbt libcap \
 	libcapi20 libcdio libconfig libcroco libcurl \
 	libdaemon libdb libdb52 libdlna \
@@ -347,7 +347,7 @@ COMMON_PACKAGES = \
 	moc modutils monit most motif motion motor mousepad \
 	mod-fastcgi moe moreutils mp3blaster mp3info mpack mpage \
 	mpc mpd mpdscribble \
-	mpg123 mpop mrtg msmtp \
+	mpg123 mplayer mpop mrtg msmtp \
 	msort msynctool mt-daapd mt-daapd-svn mtools \
 	mtr multitail mussh mutt mxml \
 	myrapbook \
@@ -358,7 +358,7 @@ COMMON_PACKAGES = \
 	newsbeuter newt \
 	nfs-server nfs-utils \
 	nget nginx ngrep nickle ninvaders nload \
-	nmap nmon node noip nostromo nrpe \
+	nmap nmon node node010 noip nostromo nrpe \
 	ntfs-3g ntfsprogs \
 	ntop ntp ntpclient nttcp nut nvi nylon nzbget nzbget-testing \
 	ocaml oleo open2300 $(OPENJDK_PACKAGES) \
@@ -370,7 +370,7 @@ COMMON_PACKAGES = \
 	par2cmdline patch patchutils \
 	pcal pcapsipdump pciutils pcre pcsc-lite pen perltgd $(PERL_PACKAGES) pinentry pixman \
 	phoneme-advanced \
-	php php-apache php-thttpd php-memcached phpmyadmin \
+	php php-apache php-opcache php-thttpd php-memcached phpmyadmin \
 	picocom picolisp pkgconfig plowshare poco polipo pop3proxy poppler \
 	popt poptop portmap postgresql postfix pound powertop \
 	ppower ppp printproto privoxy procmail \
@@ -806,7 +806,7 @@ query-%:
 
 TARGET_CC_VER = $(shell test -x "$(TARGET_CC)" && $(TARGET_CC) -dumpversion)
 
-include make/*.mk
+include $(shell ls make/*.mk)
 
 .NOTPARALLEL: %/.configured %/.built %/.staged %.ipk %/.packaged
 

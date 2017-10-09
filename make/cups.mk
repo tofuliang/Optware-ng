@@ -19,8 +19,8 @@
 #
 # You should change all these variables to suit your package.
 #
-CUPS_VERSION=2.1.4
-CUPS_SITE=https://github.com/apple/cups/releases/download/release-$(CUPS_VERSION)
+CUPS_VERSION=2.2.4
+CUPS_SITE=https://github.com/apple/cups/releases/download/v$(CUPS_VERSION)
 CUPS_SOURCE=cups-$(CUPS_VERSION)-source.tar.gz
 CUPS_DIR=cups-$(CUPS_VERSION)
 CUPS_UNZIP=zcat
@@ -55,7 +55,7 @@ CUPS_CONFLICTS=
 #
 # CUPS_IPK_VERSION should be incremented when the ipk changes.
 #
-CUPS_IPK_VERSION=4
+CUPS_IPK_VERSION=2
 
 CUPS_DOC_DESCRIPTION=Common Unix Printing System documentation.
 CUPS-DEV_DESCRIPTION=Development files for CUPS
@@ -85,7 +85,6 @@ $(CUPS_SOURCE_DIR)/debian/airprint-support.patch \
 $(CUPS_SOURCE_DIR)/debian/cups-snmp-oids-device-id-hp-ricoh.patch \
 $(CUPS_SOURCE_DIR)/debian/no-conffile-timestamp.patch \
 $(CUPS_SOURCE_DIR)/debian/pidfile.patch \
-$(CUPS_SOURCE_DIR)/debian/ppd-poll-with-client-conf.patch \
 $(CUPS_SOURCE_DIR)/debian/removecvstag.patch \
 $(CUPS_SOURCE_DIR)/debian/do-not-broadcast-with-hostnames.patch \
 $(CUPS_SOURCE_DIR)/debian/reactivate_recommended_driver.patch \
@@ -96,6 +95,7 @@ $(CUPS_SOURCE_DIR)/debian/cupsd-set-default-for-SyncOnClose-to-Yes.patch \
 $(CUPS_SOURCE_DIR)/debian/cups-set-default-error-policy-retry-job.patch \
 $(CUPS_SOURCE_DIR)/debian/man-cups-lpd-drop-dangling-references.patch \
 $(CUPS_SOURCE_DIR)/cupsd-set-default-for-RIPCache-to-auto.patch \
+$(CUPS_SOURCE_DIR)/optware_pidfile.patch \
 #$(CUPS_SOURCE_DIR)/build_without_gnutls.patch
 
 CUPS_HOST_PATCHES=\

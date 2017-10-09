@@ -22,8 +22,8 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 DELUGE_DEVELOP_REPOSITORY=https://github.com/deluge-torrent/deluge.git
-DELUGE_DEVELOP_VERSION=20160610
-DELUGE_DEVELOP_TREEISH=`git rev-list -b develop --max-count=1 --until=2016-06-10 HEAD`
+DELUGE_DEVELOP_VERSION=20170705
+DELUGE_DEVELOP_TREEISH=`git rev-list -b develop --max-count=1 --until=2017-07-05 HEAD`
 DELUGE_DEVELOP_SOURCE=deluge-develop-$(DELUGE_DEVELOP_VERSION).tar.bz2
 #DELUGE_DEVELOP_DIR=deluge-develop-$(DELUGE_DEVELOP_VERSION)
 DELUGE_DEVELOP_UNZIP=bzcat
@@ -32,14 +32,14 @@ DELUGE_DEVELOP_DESCRIPTION=Deluge BitTorrent client: development version (withou
 DELUGE_DEVELOP_GTK_DESCRIPTION=Deluge GTK+ client: development version
 DELUGE_DEVELOP_SECTION=misc
 DELUGE_DEVELOP_PRIORITY=optional
-DELUGE_DEVELOP_DEPENDS=python27, py27-twisted, py27-xdg, py27-chardet, py27-mako, py27-setuptools, py27-libtorrent-rasterbar-binding, geoip
+DELUGE_DEVELOP_DEPENDS=python27, py27-twisted, py27-xdg, py27-chardet, py27-mako, py27-setuptools, py27-libtorrent-rasterbar-binding, py27-geoip
 DELUGE_DEVELOP_GTK_DEPENDS=deluge-develop, py27-gtk, librsvg, xdg-utils, gnome-icon-theme
 DELUGE_DEVELOP_CONFLICTS=deluge
 
 #
 # DELUGE_DEVELOP_IPK_VERSION should be incremented when the ipk changes.
 #
-DELUGE_DEVELOP_IPK_VERSION=1
+DELUGE_DEVELOP_IPK_VERSION=2
 
 #
 # DELUGE_DEVELOP_CONFFILES should be a list of user-editable files
