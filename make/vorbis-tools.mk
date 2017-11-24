@@ -41,7 +41,7 @@ VORBIS-TOOLS_CONFLICTS=
 #
 # VORBIS-TOOLS_IPK_VERSION should be incremented when the ipk changes.
 #
-VORBIS-TOOLS_IPK_VERSION=6
+VORBIS-TOOLS_IPK_VERSION=7
 
 #
 # VORBIS-TOOLS_CONFFILES should be a list of user-editable files
@@ -103,7 +103,7 @@ vorbis-tools-source: $(DL_DIR)/$(VORBIS-TOOLS_SOURCE) $(VORBIS-TOOLS_PATCHES)
 # If the compilation of the package requires other packages to be staged
 # first, then do that first (e.g. "$(MAKE) <bar>-stage <baz>-stage").
 #
-$(VORBIS-TOOLS_BUILD_DIR)/.configured: $(DL_DIR)/$(VORBIS-TOOLS_SOURCE) $(VORBIS-TOOLS_PATCHES)
+$(VORBIS-TOOLS_BUILD_DIR)/.configured: $(DL_DIR)/$(VORBIS-TOOLS_SOURCE) $(VORBIS-TOOLS_PATCHES) make/vorbis-tools.mk
 	$(MAKE) libogg-stage libao-stage audiofile-stage esound-stage libcurl-stage libvorbis-stage
 	rm -rf $(BUILD_DIR)/$(VORBIS-TOOLS_DIR) $(VORBIS-TOOLS_BUILD_DIR)
 	$(VORBIS-TOOLS_UNZIP) $(DL_DIR)/$(VORBIS-TOOLS_SOURCE) | tar -C $(BUILD_DIR) -xvf -

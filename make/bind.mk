@@ -18,7 +18,7 @@ BIND_SECTION=net
 BIND_PRIORITY=optional
 BIND_DEPENDS=openssl, psmisc
 
-BIND_IPK_VERSION=1
+BIND_IPK_VERSION=2
 
 BIND_PATCHES=$(BIND_SOURCE_DIR)/libtool.patch
 
@@ -102,7 +102,7 @@ $(BIND_IPK_DIR)/CONTROL/control:
 # somewhat confused.
 #
 $(BIND_IPK): $(BIND_BUILD_DIR)/.built
-	rm -rf $(BIND_IPK_DIR) $(BIND_IPK)
+	rm -rf $(BIND_IPK_DIR) $(BUILD_DIR)/bind_*_$(TARGET_ARCH).ipk
 	$(MAKE) -C $(BIND_BUILD_DIR) DESTDIR=$(BIND_IPK_DIR) install
 	$(STRIP_COMMAND) $(BIND_IPK_DIR)$(TARGET_PREFIX)/lib/*.so.*
 	$(STRIP_COMMAND) \

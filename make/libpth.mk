@@ -42,7 +42,7 @@ LIBPTH_CONFLICTS=
 #
 # LIBPTH_IPK_VERSION should be incremented when the ipk changes.
 #
-LIBPTH_IPK_VERSION=2
+LIBPTH_IPK_VERSION=3
 
 #
 # LIBPTH_CONFFILES should be a list of user-editable files
@@ -52,7 +52,8 @@ LIBPTH_IPK_VERSION=2
 # LIBPTH_PATCHES should list any patches, in the the order in
 # which they should be applied to the source code.
 #
-LIBPTH_PATCHES=$(LIBPTH_SOURCE_DIR)/makecontext-less-glibc-linux3.patch
+LIBPTH_PATCHES=\
+$(LIBPTH_SOURCE_DIR)/makecontext-less-glibc-linux3.patch \
 
 #
 # If the compilation of the package requires additional
@@ -124,6 +125,9 @@ $(LIBPTH_BUILD_DIR)/.configured: $(DL_DIR)/$(LIBPTH_SOURCE) $(LIBPTH_PATCHES) ma
 		--target=$(GNU_TARGET_NAME) \
 		--prefix=$(TARGET_PREFIX) \
 		--disable-nls \
+		--with-mctx-mth=mcsc \
+		--with-mctx-dsp=sc \
+		--with-mctx-stk=mc \
 	)
 	$(PATCH_LIBTOOL) $(@D)/libtool
 	touch $@

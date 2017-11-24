@@ -20,7 +20,7 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-ARIA2_VERSION=1.32.0
+ARIA2_VERSION=1.33.1
 
 ARIA2_SITE=https://github.com/aria2/aria2/releases/download/release-$(ARIA2_VERSION)/
 

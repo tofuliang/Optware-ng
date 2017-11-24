@@ -41,6 +41,9 @@ PACKAGES_READY_FOR_TESTING = qt-embedded \
 # doxygen - host binary, not stripped
 # bpalogin - for some reason it can't find 'sed' on the build machine
 # btg - needs old boost and libtorrent-rasterbar
+# clinkcc - fails to build with GCC 7:
+#	../../src/cybergarage/upnp/Service.cpp: In member function ‘bool CyberLink::Service::loadSCPD(CyberIO::File*)’:
+#	../../src/cybergarage/upnp/Service.cpp:349:33: error: ISO C++ forbids comparison between pointer and integer [-fpermissive]
 #
 PACKAGES_THAT_NEED_TO_BE_FIXED = lumikki \
 	doxygen \
@@ -50,6 +53,7 @@ PACKAGES_THAT_NEED_TO_BE_FIXED = lumikki \
 	nemesis \
 	appweb libextractor sandbox \
 	btg \
+	clinkcc \
  
 PERL_PACKAGES = \
 	intltool \
@@ -264,7 +268,7 @@ COMMON_PACKAGES = \
 	catdoc ccollect ccrypt ccxstream cdargs \
 	cdrtools centerim cuetools \
 	cherokee chicken chillispot chromaprint chrpath cksfv \
-	classpath clamav clearsilver climm clinkcc clips cmdftp collectd \
+	classpath clamav clearsilver climm clips cmdftp collectd \
 	confuse connect coreutils corkscrew cpio cppunit cpufrequtils cron cryptcat \
 	cscope ctags ctcs ctorrent ctrlproxy \
 	cups cups-filters cups-pdf cvs \
@@ -312,7 +316,7 @@ COMMON_PACKAGES = \
 	ircd-hybrid irssi ivorbis-tools \
 	jabberd jamvm jed jfsutils jikes jove joe \
 	kamailio kbproto keychain kismet kissdx knock \
-	lame launchtool lcd4linux ldconfig ldd leafnode less lftp lha \
+	lame launchtool lcd4linux ldconfig ldd lddtree leafnode less lftp lha \
 	liba52 libacl libao libart libass libassuan libatomic-ops libbt libcap \
 	libcapi20 libcdio libconfig libcroco libcurl \
 	libdaemon libdb libdb52 libdlna \
@@ -325,9 +329,9 @@ COMMON_PACKAGES = \
 	libical \
 	libid3tag libidn libieee1284 libijs libinklevel libjansson libjbigkit libjpeg \
 	libksba liblcms liblcms2 libmaa libmad libmatroska libmediainfo libmemcache libmemcached libmicrohttpd \
-	libmcrypt libmm \
+	libmcrypt libmm $(strip $(if $(filter true, $(NO_LIBNSL)), , libnsl)) \
 	libmms libmnl libmpc libmpcdec libmpdclient libmpeg2 libmpfr libmrss libmtp \
-	libnetfilter-acct libnetfilter-conntrack libnetfilter-log libnetfilter-queue libnfnetlink libnettle libnl libnsl libnxml \
+	libnetfilter-acct libnetfilter-conntrack libnetfilter-log libnetfilter-queue libnfnetlink libnettle libnl libnxml \
 	libol libogg libosip2 libopensync libopenzwave libotr libpam \
 	libpar2 libpcap libpeas libpng libpth librsync librsvg \
 	libsamplerate libserf libshout libsigc++ libsoup libsndfile libsodium libsoxr libstdc++ \

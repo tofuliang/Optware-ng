@@ -36,7 +36,7 @@ LIBWEBSOCKETS_CONFLICTS=
 #
 # LIBWEBSOCKETS_IPK_VERSION should be incremented when the ipk changes.
 #
-LIBWEBSOCKETS_IPK_VERSION=4
+LIBWEBSOCKETS_IPK_VERSION=5
 
 #
 # LIBWEBSOCKETS_CONFFILES should be a list of user-editable files
@@ -53,7 +53,12 @@ $(LIBWEBSOCKETS_SOURCE_DIR)/skip_find_package_openssl.patch
 # If the compilation of the package requires additional
 # compilation or linking flags, then list them here.
 #
+ifeq (, $(filter buildroot-ppc-603e, $(OPTWARE_TARGET)))
+# Only valid for GCC 7+
+LIBWEBSOCKETS_CPPFLAGS=-Wno-error=format-overflow
+else
 LIBWEBSOCKETS_CPPFLAGS=
+endif
 LIBWEBSOCKETS_LDFLAGS=
 
 #

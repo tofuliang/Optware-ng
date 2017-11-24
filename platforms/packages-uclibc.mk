@@ -21,10 +21,7 @@ BROKEN_PACKAGES += \
 	syx \
 	xchat \
 
-SPECIFIC_PACKAGES += libiconv uclibc-opt
+SPECIFIC_PACKAGES += libiconv uclibc-opt librpc-uclibc
 
 TSHARK_VERSION := 1.2.12
-TSHARK_IPK_VERSION := 1
-
-TAR_VERSION := 1.26
-TAR_IPK_VERSION := 1
+TSHARK_IPK_VERSION := 2
