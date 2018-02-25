@@ -33,7 +33,7 @@ ipkg -force-reinstall install `ipkg list_installed|cut -d ' ' -f1`
 
 # Getting started
 
-The instructions below only download, unpack and configure the package manager `ipkg`. You must previously make sure that `/opt` is writable, by preparing USB storage or router's `jffs` partition (for routers that support them), or symlink/mount-bind `/opt` to a location on your data volume (e.g., for a NAS). If you have MIPSEL/ARM Asus router running [Asuswrt-Merlin firmware](http://asuswrt.lostrealm.ca/download), check out [How To Install New Generation Optware](https://www.hqt.ro/how-to-install-new-generation-optware) guide by @TeHashX.
+The instructions below only download, unpack and configure the package manager `ipkg`. You must previously make sure that `/opt` is writable, by preparing USB storage or router's `jffs` partition (for routers that support them), or symlink/mount-bind `/opt` to a location on your data volume (e.g., for a NAS). If you have MIPSEL/ARM Asus router running [Asuswrt-Merlin firmware](http://asuswrt.lostrealm.ca/download), check out [How To Install New Generation Optware](https://www.hqt.ro/how-to-install-new-generation-optware) guide by @TeHashX. If you owe a QNAP box, check out [Qnap Optware-NG](https://forum.qnap.com/viewtopic.php?f=124&t=137710) by @satfreak.
 
 To bootstrap the feed, connect over SSH/Telnet and type:
 
@@ -105,6 +105,10 @@ Contribution is always welcomed. These wiki pages contain useful info to get you
 Currently, the project is missing writers who would contribute by creating how-to's for end-users. We can setup a mediawiki with the help of nas-admin.org guys, but we need people to fill it. In case you are willing to contribute by writing how-to's, please contact me on #**optware** IRC channel on irc.freenode.net, nickname **alllexx**. If I'm away, you can PM me, and I'll reach you later.
 
 # News
+
+## 2017-12-11
+
+buildroot-ppc-603e feed rebuilt with 2.6.32 kernel headers to support WD My Book Live NASes
 
 ## 2016-04-25
 

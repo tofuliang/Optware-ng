@@ -19,6 +19,7 @@
 #
 # You should change all these variables to suit your package.
 #
+ifndef BUSYBOX_SITE
 BUSYBOX_SITE=http://www.busybox.net/downloads
 # If you change this version, you must check the adduser package as well.
 BUSYBOX_VERSION=1.25.0
@@ -49,7 +50,7 @@ BUSYBOX_CPPFLAGS=
 BUSYBOX_LDFLAGS=
 BUSYBOX_LDLIBS=
 ifeq (uclibc, $(LIBC_STYLE))
-BUSYBOX_CPPFLAGS += -D__UCLIBC_HAS_RPC__
+BUSYBOX_CPPFLAGS += -D__UCLIBC_HAS_RPC__ -I$(STAGING_INCLUDE_DIR)/rpc-uclibc
 BUSYBOX_LDLIBS += rpc-uclibc
 endif
 
@@ -344,3 +345,4 @@ busybox-dirclean:
 #
 busybox-check: $(BUSYBOX_IPK) $(BUSYBOX-BASE_IPK) $(BUSYBOX-LINKS_IPK)
 	perl scripts/optware-check-package.pl --target=$(OPTWARE_TARGET) $^
+endif

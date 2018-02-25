@@ -18,12 +18,13 @@ PHP_OPCACHE_SECTION=net
 PHP_OPCACHE_PRIORITY=optional
 PHP_OPCACHE_DEPENDS=php
 
-PHP_OPCACHE_VERSION:=$(shell sed -n -e 's/^PHP_VERSION *=//p' make/php.mk)
+include make/php.mk
+PHP_OPCACHE_VERSION=$(PHP_VERSION)
 
 #
 # PHP_OPCACHE_IPK_VERSION should be incremented when the ipk changes.
 #
-PHP_OPCACHE_IPK_VERSION=3
+PHP_OPCACHE_IPK_VERSION=1
 
 #
 # PHP_OPCACHE_CONFFILES should be a list of user-editable files

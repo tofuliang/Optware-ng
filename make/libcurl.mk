@@ -27,7 +27,7 @@
 # "NSLU2 Linux" other developers will feel free to edit.
 #
 LIBCURL_SITE=http://curl.haxx.se/download
-LIBCURL_VERSION=7.55.0
+LIBCURL_VERSION=7.58.0
 LIBCURL_SOURCE=curl-$(LIBCURL_VERSION).tar.gz
 LIBCURL_DIR=curl-$(LIBCURL_VERSION)
 LIBCURL_UNZIP=zcat
@@ -51,7 +51,7 @@ LIBCURL_CONFFILES=#$(TARGET_PREFIX)/etc/libcurl.conf $(TARGET_PREFIX)/etc/init.d
 # LIBCURL_PATCHES should list any patches, in the the order in
 # which they should be applied to the source code.
 #
-LIBCURL_PATCHES=$(LIBCURL_SOURCE_DIR)/powerpc.patch
+LIBCURL_PATCHES=
 
 #
 # If the compilation of the package requires additional
@@ -150,11 +150,11 @@ endif
 		--disable-telnet \
 		--disable-verbose \
 		--with-random="/dev/urandom" \
-		--with-ssl="$(STAGING_DIR)" \
+		--with-ssl="$(STAGING_PREFIX)" \
 		--without-gnutls \
 		--without-krb4 \
 		--without-libidn \
-		--with-zlib="$(STAGING_DIR)" \
+		--with-zlib="$(STAGING_PREFIX)" \
 		--with-ca-bundle=$(TARGET_PREFIX)/share/curl/curl-ca-bundle.crt \
 	)
 	$(PATCH_LIBTOOL) $(@D)/libtool

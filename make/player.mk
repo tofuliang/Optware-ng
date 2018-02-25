@@ -54,7 +54,8 @@ $(PLAYER_SOURCE_DIR)/server-Makefile.in.patch \
 $(PLAYER_SOURCE_DIR)/uint.patch \
 $(PLAYER_SOURCE_DIR)/garminnmea.cc.patch \
 $(PLAYER_SOURCE_DIR)/disable_gtk.patch \
-$(PLAYER_SOURCE_DIR)/disable_mesalib.patch
+$(PLAYER_SOURCE_DIR)/disable_mesalib.patch \
+$(PLAYER_SOURCE_DIR)/abs.patch \
 
 #
 # If the compilation of the package requires additional
@@ -65,8 +66,9 @@ ifdef NO_BUILTIN_MATH
 PLAYER_CPPFLAGS+=-fno-builtin-round -fno-builtin-rint \
 	-fno-builtin-cos -fno-builtin-sin -fno-builtin-exp
 endif
-PLAYER_LDFLAGS=-lboost_system -lm -lgcc
+PLAYER_LDFLAGS=-lboost_system -lm
 ifeq (uclibc, $(LIBC_STYLE))
+PLAYER_CPPFLAGS += -I$(STAGING_INCLUDE_DIR)/rpc-uclibc
 PLAYER_LDFLAGS += -lrpc-uclibc
 endif
 

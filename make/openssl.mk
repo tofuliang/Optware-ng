@@ -4,7 +4,7 @@
 
 OPENSSL_SITE=http://www.openssl.org/source
 
-OPENSSL_VERSION := 1.1.0f
+OPENSSL_VERSION := 1.1.0g
 OPENSSL_LIB_VERSION := 1.1
 OPENSSL_IPK_VERSION := 1
 
@@ -103,7 +103,7 @@ $(OPENSSL_BUILD_DIR)/.configured: $(DL_DIR)/$(OPENSSL_SOURCE) $(OPENSSL_PATCHES)
 		$(TARGET_CONFIGURE_OPTS) \
 		./Configure \
 			shared zlib-dynamic \
-			enable-md2 \
+			enable-md2 enable-rfc3779 \
 			$(STAGING_CPPFLAGS) \
 			--openssldir=$(TARGET_PREFIX)/etc/ssl \
 			--prefix=$(TARGET_PREFIX) \
@@ -124,7 +124,7 @@ $(OPENSSL_BUILD_DIR)/.built: $(OPENSSL_BUILD_DIR)/.configured
 		$(OPENSSL_ASFLAG) \
 		MANDIR=$(TARGET_PREFIX)/man \
 		EX_LIBS="$(STAGING_LDFLAGS) -ldl" \
-		DIRS="crypto ssl apps"
+		DIRS="crypto ssl apps engines"
 	touch $@
 
 openssl: $(OPENSSL_BUILD_DIR)/.built
@@ -197,9 +197,9 @@ $(OPENSSL_IPK) $(OPENSSL_DEV_IPK): $(OPENSSL_BUILD_DIR)/.built
 	$(STRIP_COMMAND) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/bin/openssl
 	$(INSTALL) -d $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/etc/ssl
 	$(INSTALL) -m 755 $(OPENSSL_BUILD_DIR)/apps/openssl.cnf $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/etc/ssl/openssl.cnf
-	$(INSTALL) -d $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib
-	$(INSTALL) -m 644 $(OPENSSL_BUILD_DIR)/libcrypto.so.$(OPENSSL_LIB_VERSION) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib
-	$(INSTALL) -m 644 $(OPENSSL_BUILD_DIR)/libssl.so.$(OPENSSL_LIB_VERSION) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib
+	$(INSTALL) -d $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib/engines
+	$(INSTALL) -m 755 $(OPENSSL_BUILD_DIR)/libcrypto.so.$(OPENSSL_LIB_VERSION) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib
+	$(INSTALL) -m 755 $(OPENSSL_BUILD_DIR)/libssl.so.$(OPENSSL_LIB_VERSION) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib
 	$(STRIP_COMMAND) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib/libcrypto.so*
 	$(STRIP_COMMAND) $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib/libssl.so*
 	cd $(OPENSSL_IPK_DIR)$(TARGET_PREFIX)/lib && ln -fs libcrypto.so.$(OPENSSL_LIB_VERSION) libcrypto.so.0

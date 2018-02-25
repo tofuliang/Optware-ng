@@ -13,7 +13,7 @@
 # It is usually "zcat" (for .gz) or "bzcat" (for .bz2)
 #
 PHP_SITE=http://static.php.net/www.php.net/distributions/
-PHP_VERSION=7.1.12
+PHP_VERSION=7.1.14
 PHP_SOURCE=php-$(PHP_VERSION).tar.xz
 PHP_DIR=php-$(PHP_VERSION)
 PHP_UNZIP=xzcat
@@ -68,7 +68,6 @@ PHP_PATCHES=\
     $(PHP_SOURCE_DIR)/1002-gd-iconv.patch \
     $(PHP_SOURCE_DIR)/1003-Fix-dl-cross-compiling-issue.patch \
     $(PHP_SOURCE_DIR)/1004-disable-phar-command.patch \
-    $(PHP_SOURCE_DIR)/1005-fix-asm-constraints-in-aarch64-multiply-macro.patch \
     $(PHP_SOURCE_DIR)/5000-freetype-dir.patch \
 
 #

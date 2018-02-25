@@ -150,6 +150,7 @@ PYTHON_PACKAGES = \
 	bzr bzr-rewrite bzr-svn bzrtools \
 	cherokee-pyscgi \
 	deluge deluge-develop \
+	dir2ogg \
 	dstat \
 	getmail \
 	gitosis \
@@ -172,14 +173,14 @@ PYTHON_PACKAGES = \
 	py-cryptography py-cython py-enum34 py-hgdistver py-ordereddict py-service-identity py-six \
 	py-beaker py-bittorrent py-bluez py-boto py-buildutils \
 	py-celementtree py-chardet py-cheetah py-cherrypy py-cherrytemplate py-cjson \
-	py-clips py-configobj py-constraint py-crypto py-curl \
+	py-clips py-configobj py-constraint py-crypto py-cups py-curl \
 	py-decorator py-decoratortools py-dispatcher py-django py-docutils py-duplicity \
 	py-elementtree py-feedparser py-flup py-formencode \
 	py-gdchart2 py-gd py-genshi py-geoip py-gnosis-utils py-gobject2 py-gtk \
 	py-idna py-imaplib2 py-ipaddress py-jinja2 \
 	py-hgsubversion py-hgsvn py-jsmin py-kid py-lepl py-lxml \
 	py-mako py-markdown py-mercurial \
-	py-moin py-mssql py-mx-base py-mysql \
+	py-moin py-mssql py-mutagen py-mx-base py-mysql \
 	py-myghty \
 	py-nose \
 	py-openssl py-openzwave py-paramiko \
@@ -205,6 +206,7 @@ ERLANG_PACKAGES = \
 ASTERISK_PACKAGES = \
 	asterisk10 \
 	asterisk11 \
+	asterisk11-chan-dongle \
 	asterisk13 \
 	asterisk14-core-sounds-en-alaw \
 	asterisk14-core-sounds-en-g729 \
@@ -245,6 +247,14 @@ OPENJDK_PACKAGES = \
 	openjdk7 openjdk8 \
 	bubbleupnpserver-installer
 
+GCCGO_PACKAGES = \
+	gotty \
+	shell2http \
+
+GOLANG_PACKAGES = \
+	rclone \
+	syncthing \
+
 # libao - has runtime trouble?
 COMMON_PACKAGES = \
 	$(PACKAGES_REQUIRE_LINUX26) \
@@ -268,9 +278,9 @@ COMMON_PACKAGES = \
 	catdoc ccollect ccrypt ccxstream cdargs \
 	cdrtools centerim cuetools \
 	cherokee chicken chillispot chromaprint chrpath cksfv \
-	classpath clamav clearsilver climm clips cmdftp collectd \
+	classpath clamav clearsilver climm clips cmake cmdftp collectd \
 	confuse connect coreutils corkscrew cpio cppunit cpufrequtils cron cryptcat \
-	cscope ctags ctcs ctorrent ctrlproxy \
+	cscope csync2 ctags ctcs ctorrent ctrlproxy \
 	cups cups-filters cups-pdf cvs \
 	cyrus-imapd cyrus-sasl \
 	daemonize dansguardian dash davtools \
@@ -279,7 +289,7 @@ COMMON_PACKAGES = \
 	dhcp dialog dict digitemp dircproxy distcc \
 	diffstat diffutils discount \
 	dmsetup dnscrypt-proxy dnsmasq dnstracer dokuwiki dos2unix dosfstools dovecot \
-	dropbear dropbear-android drraw dspam dtach dump \
+	dropbear dropbear-android drraw dspam dtach duktape dump \
 	e2fsprogs e2tools eaccelerator easy-rsa ed ecl electric-fence elinks \
 	elementary-xfce-icon-theme \
 	emacs22 encfs endian enhanced-ctorrent enscript esmtp esniper \
@@ -295,12 +305,12 @@ COMMON_PACKAGES = \
 	freecell freeradius freetds freetype freeze \
 	fribidi ftpcopy fslint ftpd-topfield fuppes fuse fuse-exfat \
 	gambit-c gawk gcal gconv-modules gdb gdbm gdchart \
-	ged gedit geoip gettext gdk-pixbuf \
+	ged gedit geoip gerbera gettext gdk-pixbuf \
 	ggrab ghostscript ghostscript-fonts git gkrellmd glib glib-networking gnet gnokii gnome-icon-theme \
 	gnome-icon-theme-symbolic \
 	gnu-httptunnel gnu-smalltalk gnugo \
 	gnupg1 gnupg gnuplot gnutls gpgme \
-	gloox gobject-introspection golang gpsd \
+	gloox gobject-introspection golang $(GCCGO_PACKAGES) $(GOLANG_PACKAGES) gpsd \
 	grep groff gsasl gsnmp gtmess gtypist gutenprint gzip \
 	gphoto2 libgphoto2 \
 	gift giftcurs gift-ares gift-fasttrack gift-gnutella \
@@ -327,16 +337,16 @@ COMMON_PACKAGES = \
 	libgc libgcrypt libgd libghttp libgmp libgpg-error libgssapi \
 	libglade libhid \
 	libical \
-	libid3tag libidn libieee1284 libijs libinklevel libjansson libjbigkit libjpeg \
+	libid3tag libidn libieee1284 libijs libinklevel libjansson libjbigkit libjpeg libjson-c \
 	libksba liblcms liblcms2 libmaa libmad libmatroska libmediainfo libmemcache libmemcached libmicrohttpd \
 	libmcrypt libmm $(strip $(if $(filter true, $(NO_LIBNSL)), , libnsl)) \
 	libmms libmnl libmpc libmpcdec libmpdclient libmpeg2 libmpfr libmrss libmtp \
 	libnetfilter-acct libnetfilter-conntrack libnetfilter-log libnetfilter-queue libnfnetlink libnettle libnl libnxml \
-	libol libogg libosip2 libopensync libopenzwave libotr libpam \
+	libol libogg libosip2 libopensync libopenzwave libopus libotr libpam \
 	libpar2 libpcap libpeas libpng libpth librsync librsvg \
-	libsamplerate libserf libshout libsigc++ libsoup libsndfile libsodium libsoxr libstdc++ \
-	libtasn1 libtheora libtiff libtool libtorrent \
-	libunistring libupnp libusb libusb1 libuv libvncserver \
+	libsamplerate libserf libshout libsigc++ libsoup libsndfile libsodium libsoxr libstdc++ libgo \
+	libtasn1 libtheora libtiff libtirpc libtool libtorrent \
+	libubox libunistring libupnp libupnp6 libusb libusb1 libuv libvncserver \
 	libvorbis libvorbisidec libwebsockets libxfce4ui libxfce4util libxkbcommon libxml2 libxslt libzen libzip \
 	lighttpd lirc links2 linksys-tftp linphone littlesmalltalk llink \
 	logrotate lookat loudmouth lrzsz lsof ltrace \
@@ -374,7 +384,7 @@ COMMON_PACKAGES = \
 	par2cmdline patch patchutils \
 	pcal pcapsipdump pciutils pcre pcsc-lite pen perltgd $(PERL_PACKAGES) pinentry pixman \
 	phoneme-advanced \
-	php php-apache php-opcache php-thttpd php-memcached phpmyadmin \
+	php php-apache php-geoip php-imagick php-opcache php-thttpd php-memcached phpmyadmin \
 	picocom picolisp pkgconfig plowshare poco polipo pop3proxy poppler \
 	popt poptop portmap postgresql postfix pound powertop \
 	ppower ppp printproto privoxy procmail \
@@ -384,7 +394,7 @@ COMMON_PACKAGES = \
 	radiusclient-ng rc rc5pipe rcs rdate \
 	readline re2c recode recordext recordprotos \
 	redir renderext renderproto rhtvision rkhunter \
-	rlfe rlwrap rox-filer rrdcollect rrdtool \
+	rlfe rlwrap rox-filer rpcbind rrdcollect rrdtool \
 	rssh rsstail rsync rtmpdump rtorrent rtpproxy ruby rubygems rxtx \
 	sablevm samba samba2 samba34 samba35 samba36 sane-backends \
 	scli scponly screen scrobby scsi-idle sd-idle sdl sdparm \
@@ -410,7 +420,7 @@ COMMON_PACKAGES = \
 	ucl udev udns udpxy uemacs ulogd unarj uncia unfs3 unionfs-fuse units unixodbc \
 	unrar unrtf \
 	unzip up-imapproxy updatedd upslug2 \
-	upx usbutils ushare utelnetd utf8proc util-linux \
+	upx usb-modeswitch usbutils ushare utelnetd utf8proc util-linux \
 	vblade vdr-mediamvp vim vitetris vlc \
 	vnstat vorbis-tools vorbisgain vpnc vsftpd vte vtun \
 	w3cam w3m wayland wakelan wavpack webalizer weechat werc wget \
@@ -654,6 +664,7 @@ PERL_CPAN_SITE=ftp.auckland.ac.nz
 
 TARGET_CXX=$(TARGET_CROSS)g++
 TARGET_CC=$(TARGET_CROSS)gcc
+TARGET_GCCGO=$(TARGET_CROSS)gccgo
 TARGET_CPP="$(TARGET_CC) -E"
 TARGET_LD=$(TARGET_CROSS)ld
 TARGET_AR=$(TARGET_CROSS)ar
@@ -696,6 +707,7 @@ CMAKE_CONFIGURE_OPTS= \
 	-DCMAKE_AR=$(TARGET_AR) \
 	-DCMAKE_NM=$(TARGET_NM) \
 	-DCMAKE_RANLIB=$(TARGET_RUNLIB) \
+	-DPKG_CONFIG_EXECUTABLE=$(OPTWARE_TOP)/scripts/pkg-config.sh \
 	-DCMAKE_FIND_ROOT_PATH="$(STAGING_PREFIX);$(TARGET_CROSS_TOP)" \
 	-DCMAKE_LIBRARY_PATH=$(STAGING_LIB_DIR) \
 	-DCMAKE_INCLUDE_PATH=$(STAGING_INCLUDE_DIR) \
@@ -707,6 +719,22 @@ CMAKE_CONFIGURE_OPTS= \
 	-DDL_LIBRARY=$(STAGING_DIR) \
 	-DCMAKE_PREFIX_PATH=$(STAGING_DIR) \
 	-DCMAKE_SKIP_RPATH=TRUE
+
+TARGET_GOARCH=$(strip \
+$(if $(filter buildroot-armeabi-ng buildroot-armeabihf buildroot-armv5eabi-ng buildroot-armv5eabi-ng-legacy, $(OPTWARE_TARGET)), arm, \
+$(if $(filter buildroot-i686, $(OPTWARE_TARGET)), 386, \
+$(if $(filter buildroot-mipsel-ng, $(OPTWARE_TARGET)), mipsle, \
+$(if $(filter buildroot-ppc-603e ct-ng-ppc-e500v2, $(OPTWARE_TARGET)), ppc, \
+$(TARGET_ARCH))))))
+
+CROSS_GCCGO_GOROOT ?= $(TARGET_CROSS_TOP)/$(EXACT_TARGET_NAME)
+
+TARGET_GCCGO_GO_ENV= \
+	GCCGO=$(TARGET_GCCGO) \
+	GOROOT=$(CROSS_GCCGO_GOROOT) \
+	GOARCH=$(TARGET_GOARCH) \
+	CC=$(TARGET_CC) \
+	CXX=$(TARGET_CXX)
 
 TARGET_PATH=$(STAGING_PREFIX)/bin:$(STAGING_DIR)/bin:$(TARGET_PREFIX)/bin:$(TARGET_PREFIX)/sbin:/bin:/sbin:/usr/bin:/usr/sbin
 

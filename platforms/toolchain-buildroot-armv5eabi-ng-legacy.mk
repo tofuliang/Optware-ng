@@ -1,9 +1,9 @@
-# This toolchain is gcc 7.2.0 on uClibc-ng 1.0.26
+# This toolchain is gcc 7.2.0 on uClibc-ng 1.0.27
 
 GNU_TARGET_NAME = arm-linux
 EXACT_TARGET_NAME = arm-buildroot-linux-uclibcgnueabi
 
-UCLIBC_VERSION=1.0.26
+UCLIBC_VERSION=1.0.27
 
 DEFAULT_TARGET_PREFIX=/opt
 TARGET_PREFIX ?= /opt
@@ -13,8 +13,9 @@ TARGET_ARCH=arm
 TARGET_OS=linux-uclibc
 
 LIBSTDC++_VERSION=6.0.24
+LIBGO_VERSION=11.0.0
 
-LIBC-DEV_IPK_VERSION=3
+LIBC-DEV_IPK_VERSION=1
 
 GETTEXT_NLS=enable
 #NO_BUILTIN_MATH=true
@@ -27,21 +28,6 @@ CROSS_CONFIGURATION_UCLIBC_VERSION=$(UCLIBC_VERSION)
 NATIVE_GCC_VERSION=7.2.0
 GCC_SOURCE=gcc-$(NATIVE_GCC_VERSION).tar.xz
 GCC_UNZIP=xzcat
-
-ifeq ($(HOST_MACHINE), $(filter armv5tel armv5tejl, $(HOST_MACHINE)))
-
-HOSTCC = $(TARGET_CC)
-GNU_HOST_NAME = $(GNU_TARGET_NAME)
-TARGET_CROSS = $(TARGET_PREFIX)/bin/
-TARGET_LIBDIR = $(TARGET_PREFIX)/lib
-TARGET_INCDIR = $(TARGET_PREFIX)/include
-TARGET_LDFLAGS =
-TARGET_CUSTOM_FLAGS=
-TARGET_CFLAGS= $(TARGET_OPTIMIZATION) $(TARGET_DEBUGGING) $(TARGET_CUSTOM_FLAGS)
-
-toolchain:
-
-else
 
 HOSTCC = gcc
 GNU_HOST_NAME = $(HOST_MACHINE)-pc-linux-gnu
@@ -75,6 +61,7 @@ BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR=$(SOURCE_DIR)/buildroot-armv5eabi-ng-le
 BUILDROOT-ARMv5EABI-NG-LEGACY_PATCHES=\
 $(BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR)/uclibc-ng-config.patch \
 $(BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR)/toolchain-gccgo.patch \
+$(BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR)/uclibc-ng-bump.patch \
 
 BUILDROOT-ARMv5EABI-NG-LEGACY_UCLIBC-NG_PATCHES=\
 $(wildcard $(BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR)/uclibc-ng-patches/*.patch)
@@ -116,9 +103,10 @@ ifneq ($(BUILDROOT-ARMv5EABI-NG-LEGACY_GCC_PATCHES), )
 	$(INSTALL) -m 644 $(BUILDROOT-ARMv5EABI-NG-LEGACY_GCC_PATCHES) \
 		$(TARGET_CROSS_BUILD_DIR)/package/gcc/$(CROSS_CONFIGURATION_GCC_VERSION)
 endif
-#	cd $(TARGET_CROSS_BUILD_DIR)/package/uclibc; \
-		rm -f 0001-include-netdb.h-Do-not-define-IDN-related-flags.patch 0002-mips-fix-build-if-threads-are-disabled.patch
-	(echo "DO_XSI_MATH=y"; echo "COMPAT_ATEXIT=y") >> $(TARGET_CROSS_BUILD_DIR)/package/uclibc/uClibc-ng.config
+	cd $(TARGET_CROSS_BUILD_DIR)/package/uclibc; \
+		rm -f 0001-fix-issues-with-gdb-8.0.patch 0002-microblaze-handle-R_MICROBLAZE_NONE-for-ld.so-bootst.patch
+	(echo "DO_XSI_MATH=y"; echo "COMPAT_ATEXIT=y"; echo "UCLIBC_SV4_DEPRECATED=y") >> \
+				$(TARGET_CROSS_BUILD_DIR)/package/uclibc/uClibc-ng.config
 	sed 's|^BR2_DL_DIR=.*|BR2_DL_DIR="$(DL_DIR)"|' $(BUILDROOT-ARMv5EABI-NG-LEGACY_SOURCE_DIR)/config > $(TARGET_CROSS_BUILD_DIR)/.config
 	touch $@
 
@@ -142,4 +130,4 @@ NATIVE_GCC_ADDITIONAL_DEPS=zlib
 
 NATIVE_GCC_ADDITIONAL_STAGE=zlib-stage
 
-endif
+NATIVE_GCC_EXTRA_PATCHES=$(GCC_SOURCE_DIR)/$(GCC_VERSION)/0994-libgo-no-fallocate.patch.conditional

@@ -20,8 +20,8 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-GEOIP_SITE=http://download.openpkg.org/components/cache/geoip
-GEOIP_VERSION=1.6.11
+GEOIP_SITE=https://github.com/maxmind/geoip-api-c/releases/download/v$(GEOIP_VERSION)
+GEOIP_VERSION=1.6.12
 GEOIP_SOURCE=GeoIP-$(GEOIP_VERSION).tar.gz
 GEOIP_DIR=GeoIP-$(GEOIP_VERSION)
 GEOIP_UNZIP=zcat
@@ -118,9 +118,10 @@ $(GEOIP_BUILD_DIR)/.configured: $(DL_DIR)/$(GEOIP_SOURCE) $(GEOIP_PATCHES) make/
 	$(AUTORECONF1.14) -vif $(@D)
 	(cd $(@D); \
 		$(TARGET_CONFIGURE_OPTS) \
-		ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes \
 		CPPFLAGS="$(STAGING_CPPFLAGS) $(GEOIP_CPPFLAGS)" \
 		LDFLAGS="$(STAGING_LDFLAGS) $(GEOIP_LDFLAGS)" \
+		ac_cv_func_malloc_0_nonnull=yes \
+		ac_cv_func_realloc_0_nonnull=yes \
 		./configure \
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_TARGET_NAME) \
