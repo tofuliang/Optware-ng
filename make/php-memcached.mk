@@ -20,8 +20,8 @@
 # from your name or email address.  If you leave MAINTAINER set to
 # "NSLU2 Linux" other developers will feel free to edit.
 #
-PHP_MEMCACHED_VERSION=3.0.2
-PHP_MEMCACHED_REPOSITORY=https://github.com/php-memcached-dev/php-memcached/archive/v3.0.2.tar.gz/
+PHP_MEMCACHED_VERSION=3.0.4
+PHP_MEMCACHED_REPOSITORY=https://github.com/php-memcached-dev/php-memcached/archive
 PHP_MEMCACHED_SOURCE=v$(PHP_MEMCACHED_VERSION).tar.gz
 PHP_MEMCACHED_DIR=php-memcached-$(PHP_MEMCACHED_VERSION)
 PHP_MEMCACHED_UNZIP=zcat
@@ -76,8 +76,7 @@ PHP_MEMCACHED_IPK=$(BUILD_DIR)/php-memcached_$(PHP_MEMCACHED_VERSION)-$(PHP_MEMC
 # scripts/checksums/$(PHP_MEMCACHED_SOURCE).sha512
 #
 $(DL_DIR)/$(PHP_MEMCACHED_SOURCE):
-	$(WGET) -P $(@D) $(PHP_MEMCACHED_REPOSITORY)/php-memcached_$(@F)
-
+	$(WGET) -o php-memcached-v$(PHP_MEMCACHED_VERSION).tar.gz -P $(@D) $(PHP_MEMCACHED_REPOSITORY)/$(@F) 
 #
 # The source code depends on it existing within the download directory.
 # This target will be called by the top level Makefile to download the
